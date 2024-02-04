@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Check, Copy, RefreshCw } from "lucide-react";
-import axios from "axios";
 
 import {
   Dialog,
@@ -10,15 +9,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-import { useModal } from "@/hooks/use-modal-store";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
+import { useModal } from "@/hooks/use-modal-store";
 import { useOrigin } from "@/hooks/use-origin";
+import axios from "axios";
 
 export const InviteModal = () => {
-  const { onOpen, isOpen, onClose, type, data } = useModal();
+  const { isOpen, onClose, type, data, onOpen } = useModal();
   const origin = useOrigin();
 
   const isModalOpen = isOpen && type === "invite";
@@ -41,13 +41,13 @@ export const InviteModal = () => {
   const onNew = async () => {
     try {
       setIsLoading(true);
+
       const response = await axios.patch(
         `/api/servers/${server?.id}/invite-code`,
       );
-
       onOpen("invite", { server: response.data });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -67,10 +67,9 @@ export const InviteModal = () => {
           </Label>
           <div className="flex items-center mt-2 gap-x-2">
             <Input
-              disabled={isLoading}
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset=0"
+              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
               value={inviteUrl}
-              readOnly
+              disabled={isLoading}
             />
             <Button disabled={isLoading} onClick={onCopy} size="icon">
               {copied ? (
@@ -84,10 +83,10 @@ export const InviteModal = () => {
             disabled={isLoading}
             variant="link"
             size="sm"
-            className="text-xs text-zinc-500 mt-4"
+            className="text-xs text-zinc-500 mt-2"
             onClick={onNew}
           >
-            Generate a new link
+            Generat new link
             <RefreshCw className="w-4 h-4 ml-2" />
           </Button>
         </div>
