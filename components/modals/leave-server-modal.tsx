@@ -55,7 +55,7 @@ export const LeaveServerModal = () => {
             ?
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="bg-gray-100 ox-6 py-4">
+        <DialogFooter className="bg-gray-100 px-6 py-4">
           <div className="flex items-center justify-between w-full">
             <Button disabled={isLoading} onClick={onClose} variant="ghost">
               Cancel
