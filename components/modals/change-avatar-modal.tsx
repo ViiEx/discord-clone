@@ -10,6 +10,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -37,12 +38,14 @@ export const ChangeAvatarModal = () => {
     },
   });
 
+  const isLoading = form.formState.isSubmitting;
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post("/api/profile/change-avatar", values);
       form.reset();
       onClose();
-      router.reload();
+      router.refresh();
     } catch (error) {
       console.error(error);
     }
@@ -74,7 +77,7 @@ export const ChangeAvatarModal = () => {
                   <FormItem>
                     <FormControl>
                       <FileUpload
-                        endpoint="serverImage"
+                        endpoint="profileImage"
                         value={field.value}
                         onChange={field.onChange}
                       />
@@ -83,6 +86,11 @@ export const ChangeAvatarModal = () => {
                 )}
               />
             </div>
+            <DialogFooter className="bg-gray-100 px-6 py-4">
+              <Button variant="primary" disabled={isLoading} type="submit">
+                Save
+              </Button>
+            </DialogFooter>
           </form>
         </Form>
       </DialogContent>

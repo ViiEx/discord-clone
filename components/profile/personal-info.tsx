@@ -1,11 +1,8 @@
-"use client";
-
-import { useModal } from "@/hooks/use-modal-store";
+import React from "react";
 import { ProfileAvatar } from "./profile-avatar";
+import { ChangeAvatar } from "./personal-info/change-avatart";
 
 const PersonalInfo = () => {
-  const { onOpen } = useModal();
-
   return (
     <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
       <div>
@@ -21,18 +18,7 @@ const PersonalInfo = () => {
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
           <div className="col-span-full flex items-center gap-x-8">
             <ProfileAvatar />
-            <div>
-              <button
-                onClick={() => onOpen("changeAvatar")}
-                type="button"
-                className="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
-              >
-                Change avatar
-              </button>
-              <p className="mt-2 text-xs leading-5 text-gray-400">
-                JPG, GIF or PNG. 4MB max.
-              </p>
-            </div>
+            <ChangeAvatar />
           </div>
 
           <div className="sm:col-span-3">

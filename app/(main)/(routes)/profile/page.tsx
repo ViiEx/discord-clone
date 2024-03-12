@@ -1,4 +1,5 @@
 import PersonalInfo from "@/components/profile/personal-info";
+import { ProfileAvatar } from "@/components/profile/profile-avatar";
 
 const ProfilePage = () => {
   return (
